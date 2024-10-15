@@ -17,6 +17,9 @@ Tabel Isi
     -   [3. POST /books](#3-post-books)
     -   [4. PUT /books/{id}](#4-put-booksid)
     -   [5. DELETE /books/{id}](#5-delete-booksid)
+-   [Unit Test](#unit-test)
+    -   [1. Authors](#1-authors)
+    -   [2. Books](#2-books)
 
 ## Base URL
 
@@ -314,3 +317,13 @@ http://127.0.0.1:8000/api
         "message": "Book not found"
     }
     ```
+
+## Unit Test
+
+### 1. Authors
+
+`php artisan test --filter=AuthorApiTest`
+
+### 2. Books
+
+`php artisan test --filter=BookApiTest`
