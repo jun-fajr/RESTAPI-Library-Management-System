@@ -324,6 +324,38 @@ http://127.0.0.1:8000/api
 
 `php artisan test --filter=AuthorApiTest`
 
+Output:
+
+```json
+ PASS  Tests\Feature\AuthorApiTest
+  ✓ can list authors                                                                                                                                                               0.38s
+  ✓ can create author                                                                                                                                                              0.02s
+  ✓ can view author                                                                                                                                                                0.02s
+  ✓ can update author                                                                                                                                                              0.02s
+  ✓ can delete author                                                                                                                                                              0.02s
+  ✓ validation on create author                                                                                                                                                    0.02s
+  ✓ view non existent author                                                                                                                                                       0.01s
+
+  Tests:    7 passed (24 assertions)
+  Duration: 0.56s
+```
+
 ### 2. Books
 
 `php artisan test --filter=BookApiTest`
+
+Output:
+
+```json
+ PASS  Tests\Feature\BookApiTest
+  ✓ can list books                                                                                                                                                                 0.39s
+  ✓ can create book                                                                                                                                                                0.03s
+  ✓ can view book                                                                                                                                                                  0.02s
+  ✓ can update book                                                                                                                                                                0.02s
+  ✓ can delete book                                                                                                                                                                0.02s
+  ✓ validation on create book                                                                                                                                                      0.02s
+  ✓ view non existent book                                                                                                                                                         0.01s
+
+  Tests:    7 passed (26 assertions)
+  Duration: 0.58s
+```
