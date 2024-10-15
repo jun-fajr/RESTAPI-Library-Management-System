@@ -11,6 +11,9 @@ class Book extends Model
 
     protected $fillable = ['title', 'description', 'publish_date', 'author_id'];
 
+    protected $casts = [
+        'publish_date' => 'date',
+    ];
     /**
      * Get the author that owns the book.
      */
