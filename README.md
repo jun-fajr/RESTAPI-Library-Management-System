@@ -1,66 +1,316 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# REST API Library Management System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+API ini memungkinkan Anda untuk mengelola penulis dan buku. Berikut adalah dokumentasi untuk setiap endpoint yang tersedia.
 
-## About Laravel
+Tabel Isi
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+-   [Base URL](#base-url)
+-   [Authors API](#authors-api)
+    -   [1. GET /authors](#1-get-authors)
+    -   [2. GET /authors/{id}](#2-get-authorsid)
+    -   [3. POST /authors](#3-post-authors)
+    -   [4. PUT /authors/{id}](#4-put-authorsid)
+    -   [5. DELETE /authors/{id}](#5-delete-authorsid)
+-   [Books API](#books-api)
+    -   [1. GET /books](#1-get-books)
+    -   [2. GET /books/{id}](#2-get-booksid)
+    -   [3. POST /books](#3-post-books)
+    -   [4. PUT /books/{id}](#4-put-booksid)
+    -   [5. DELETE /books/{id}](#5-delete-booksid)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Base URL
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+http://127.0.0.1:8000/api
 
-## Learning Laravel
+## Authors API
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 1. GET /authors
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+-   **Deskripsi**: Mengambil daftar semua penulis.
+-   **Response**:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+    ```json
+    [
+        {
+            "id": 1,
+            "name": "Mr. Jermain Shanahan",
+            "bio": "Illo quasi cupiditate maxime magni sint. Velit quae corrupti quia aperiam. Consectetur qui omnis ut neque perferendis.",
+            "birth_date": "2012-02-10T00:00:00.000000Z",
+            "created_at": "2024-10-15T13:24:06.000000Z",
+            "updated_at": "2024-10-15T13:24:06.000000Z",
+            "books": [
+                {
+                    "id": 6,
+                    "title": "Sit temporibus tempora quisquam omnis exercitationem ut et.",
+                    "description": "Voluptates molestiae reprehenderit magni excepturi. Quam iste sit accusamus quia. Ducimus ut et ea sunt recusandae quia ut. Eligendi rerum illo inventore harum et consequatur quisquam.",
+                    "publish_date": "2015-01-29T00:00:00.000000Z",
+                    "author_id": 2,
+                    "created_at": "2024-10-15T13:24:06.000000Z",
+                    "updated_at": "2024-10-15T13:24:06.000000Z"
+                },
 
-## Laravel Sponsors
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Prof. Jaylan Wisozk Sr.",
+            .......
+    ]
+    ```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 2. GET /authors/ {id}
 
-### Premium Partners
+-   **Deskripsi**: Mengambil detail dari penulis tertentu.
+-   **Contoh Permintaan**:
+    ```
+    GET /authors/1
+    ```
+-   **Response**:
+    ```json
+        "id": 1,
+        "name": "Mr. Jermain Shanahan",
+        "bio": "Illo quasi cupiditate maxime magni sint. Velit quae corrupti quia aperiam. Consectetur qui omnis ut neque perferendis.",
+        "birth_date": "2012-02-10T00:00:00.000000Z",
+        "created_at": "2024-10-15T13:24:06.000000Z",
+        "updated_at": "2024-10-15T13:24:06.000000Z",
+        "books": [
+            {
+                "id": 6,
+                "title": "Sit temporibus tempora quisquam omnis exercitationem ut et.",
+                "description": "Voluptates molestiae reprehenderit magni excepturi. Quam iste sit accusamus quia. Ducimus ut et ea sunt recusandae quia ut. Eligendi rerum illo inventore harum et consequatur quisquam.",
+                "publish_date": "2015-01-29T00:00:00.000000Z",
+                "author_id": 2,
+                "created_at": "2024-10-15T13:24:06.000000Z",
+                "updated_at": "2024-10-15T13:24:06.000000Z"
+            },
+    ```
+-   **Not Found**:
+    ```json
+    {
+        "message": "Author not found"
+    }
+    ```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### 3. POST /authors
 
-## Contributing
+-   **Deskripsi**: Membuat penulis baru.
+-   **Contoh Permintaan**:
+    ```json
+    {
+        "name": "John Doe",
+        "bio": "An author of various books."
+    }
+    ```
+-   **Response**:
+    ```json
+    {
+        "name": "John Doe",
+        "bio": "An author of various books.",
+        "updated_at": "2024-10-15T13:26:42.000000Z",
+        "created_at": "2024-10-15T13:26:42.000000Z",
+        "id": 11
+    }
+    ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 4. PUT /authors/ {id}
 
-## Code of Conduct
+-   **Deskripsi**: Memperbarui penulis yang ada.
+-   **Contoh Permintaan**:
+    ```json
+    {
+        "id": 1,
+        "name": "Dr. Christiana Ziemann Updated",
+        "bio": "Updated biography."
+    }
+    ```
+-   **Response**:
+    ```json
+    {
+        "id": 1,
+        "name": "Dr. Christiana Ziemann Updated",
+        "bio": "Updated biography.",
+        "birth_date": "2007-04-29T00:00:00.000000Z",
+        "created_at": "2024-10-15T13:24:06.000000Z",
+        "updated_at": "2024-10-15T13:27:03.000000Z"
+    }
+    ```
+-   **Not Found**:
+    ```json
+    {
+        "message": "Author not found"
+    }
+    ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 5. DELETE /authors/ {id}
 
-## Security Vulnerabilities
+-   **Deskripsi**: Menghapus penulis tertentu.
+-   **Contoh Permintaan**:
+    ```
+    DELETE /authors/1
+    ```
+-   **Response**:
+    ```json
+    {
+        "message": "Author deleted successfully"
+    }
+    ```
+-   **Not Found**:
+    ```json
+    {
+        "message": "Author not found"
+    }
+    ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Books API
 
-## License
+### 1. GET /books
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+-   **Deskripsi**: Mengambil daftar semua buku.
+-   **Response**:
+    ```json
+    [
+        {
+            "id": 6,
+            "title": "Sit temporibus tempora quisquam omnis exercitationem ut et.",
+            "description": "Voluptates molestiae reprehenderit magni excepturi. Quam iste sit accusamus quia. Ducimus ut et ea sunt recusandae quia ut. Eligendi rerum illo inventore harum et consequatur quisquam.",
+            "publish_date": "2015-01-29T00:00:00.000000Z",
+            "author_id": 2,
+            "created_at": "2024-10-15T13:24:06.000000Z",
+            "updated_at": "2024-10-15T13:24:06.000000Z",
+            "author": {
+                "id": 2,
+                "name": "Mr. Jermain Shanahan",
+                "bio": "Illo quasi cupiditate maxime magni sint. Velit quae corrupti quia aperiam. Consectetur qui omnis ut neque perferendis.",
+                "birth_date": "2012-02-10T00:00:00.000000Z",
+                "created_at": "2024-10-15T13:24:06.000000Z",
+                "updated_at": "2024-10-15T13:24:06.000000Z"
+            }
+        },
+        {
+            "id": 7,
+            "title": "Non omnis quia sed sed consequatur.",
+            "description": "Consectetur tempora nesciunt illum rerum. Id non ex cupiditate ut. Omnis labore necessitatibus earum. Culpa distinctio necessitatibus qui veritatis animi ut nam.",
+            "publish_date": "1986-05-11T00:00:00.000000Z",
+            "author_id": 2,
+            "created_at": "2024-10-15T13:24:07.000000Z",
+            "updated_at": "2024-10-15T13:24:07.000000Z",
+            "author": {
+                "id": 2,
+                "name": "Mr. Jermain Shanahan",
+                "bio": "Illo quasi cupiditate maxime magni sint. Velit quae corrupti quia aperiam. Consectetur qui omnis ut neque perferendis.",
+                "birth_date": "2012-02-10T00:00:00.000000Z",
+                "created_at": "2024-10-15T13:24:06.000000Z",
+                "updated_at": "2024-10-15T13:24:06.000000Z"
+            }
+        },
+    ```
+
+### 2. GET /books/ {id}
+
+-   **Deskripsi**: Mengambil detail dari buku tertentu.
+-   **Contoh Permintaan**:
+    ```
+    GET /books/1
+    ```
+-   **Response**:
+    ```json
+    {
+        "id": 1,
+        "title": "Sit temporibus tempora quisquam omnis exercitationem ut et.",
+        "description": "Voluptates molestiae reprehenderit magni excepturi. Quam iste sit accusamus quia. Ducimus ut et ea sunt recusandae quia ut. Eligendi rerum illo inventore harum et consequatur quisquam.",
+        "publish_date": "2015-01-29T00:00:00.000000Z",
+        "author_id": 2,
+        "created_at": "2024-10-15T13:24:06.000000Z",
+        "updated_at": "2024-10-15T13:24:06.000000Z",
+        "author": {
+            "id": 2,
+            "name": "Mr. Jermain Shanahan",
+            "bio": "Illo quasi cupiditate maxime magni sint. Velit quae corrupti quia aperiam. Consectetur qui omnis ut neque perferendis.",
+            "birth_date": "2012-02-10T00:00:00.000000Z",
+            "created_at": "2024-10-15T13:24:06.000000Z",
+            "updated_at": "2024-10-15T13:24:06.000000Z"
+        }
+    }
+    ```
+-   **Not Found**:
+    ```json
+    {
+        "message": "Book not found"
+    }
+    ```
+
+### 3. POST /books
+
+-   **Deskripsi**: Membuat buku baru.
+-   **Contoh Permintaan**:
+
+    ```json
+    {
+        "title": "Laravel for Beginners",
+        "description": "A beginner's guide to Laravel.",
+        "publish_date": "2023-01-01",
+        "author_id": 2
+    }
+    ```
+
+-   **Response**:
+    ```json
+    {
+        "title": "Laravel for Beginners",
+        "description": "A beginner's guide to Laravel.",
+        "publish_date": "2023-01-01T00:00:00.000000Z",
+        "author_id": 2,
+        "updated_at": "2024-10-15T13:55:02.000000Z",
+        "created_at": "2024-10-15T13:55:02.000000Z",
+        "id": 52
+    }
+    ```
+
+### 4. PUT /books/ {id}
+
+-   **Deskripsi**: Memperbarui buku yang ada.
+-   **Contoh Permintaan**:
+    ```json
+    {
+        "title": "Updated Book Title",
+        "description": "An updated description.",
+        "publish_date": "2023-01-15",
+        "author_id": 1
+    }
+    ```
+-   **Response**:
+    ```json
+    {
+        "id": 1,
+        "title": "Updated Book Title",
+        "description": "An updated description.",
+        "publish_date": "2023-01-15",
+        "author_id": 1
+    }
+    ```
+-   **Not Found**:
+    ```json
+    {
+        "message": "Book not found"
+    }
+    ```
+
+### 5. DELETE /books/ {id}
+
+-   **Deskripsi**: Menghapus buku tertentu.
+-   **Contoh Permintaan**:
+    ```
+    DELETE /books/1
+    ```
+-   **Response**:
+    ```json
+    {
+        "message": "Book deleted successfully"
+    }
+    ```
+-   **Not Found**:
+    ```json
+    {
+        "message": "Book not found"
+    }
+    ```
